@@ -27,4 +27,12 @@ $('.btn').on('click', function() {
   var frequency = $('#frequency')
     .val()
     .trim();
+
+  db.ref().push({
+    name: name,
+    destination: destination,
+    firstTime: firstTime,
+    frequency: frequency,
+    dateAdded: firebase.database.ServerValue.TIMESTAMP
+  });
 });
