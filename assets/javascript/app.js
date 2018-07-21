@@ -11,3 +11,20 @@ var config = {
 };
 firebase.initializeApp(config);
 var db = firebase.database();
+
+$('.btn').on('click', function() {
+  event.preventDefault();
+
+  var name = $('#name')
+    .val()
+    .trim();
+  var destination = $('#destination')
+    .val()
+    .trim();
+  var firstTime = $('#firstTime')
+    .val()
+    .trim();
+  var frequency = $('#frequency')
+    .val()
+    .trim();
+});
