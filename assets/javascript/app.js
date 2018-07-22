@@ -28,11 +28,18 @@ $('.btn').on('click', function() {
     .val()
     .trim();
 
-  db.ref().push({
-    name: name,
-    destination: destination,
-    firstTime: firstTime,
-    frequency: frequency,
-    dateAdded: firebase.database.ServerValue.TIMESTAMP
-  });
+  if (
+    name.length > 0 &&
+    destination.length > 0 &&
+    firstTime.length > 0 &&
+    frequency.length > 0
+  ) {
+    db.ref().push({
+      name: name,
+      destination: destination,
+      firstTime: firstTime,
+      frequency: frequency,
+      dateAdded: firebase.database.ServerValue.TIMESTAMP
+    });
+  }
 });
