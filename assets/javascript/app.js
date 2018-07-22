@@ -42,12 +42,10 @@ $(document).ready(function() {
       });
 
       $('.form-control').val('');
-      
     }
-
   });
 
-  db.ref().on('child_added', function (snapshot) {
+  db.ref().on('child_added', function(snapshot) {
     var snap = snapshot.val();
 
     var row = $('<tr>');
@@ -59,8 +57,19 @@ $(document).ready(function() {
     row.append(colDestination);
     row.append(colFrequency);
 
+    var safeStart = moment(snap.firstTime, 'HH:mm').subtract(1, 'years');
+    var freq = parseInt(snap.frequency);
+    var current = moment();
+    var elapsed = parseInt(current.diff(safeStart, 'minutes'));
+    var away = freq - (elapsed % freq);
+    var next = current.add(away, 'minutes').format('HH:mm');
+
+    var colNextArrival = $('<td>').text(next);
+    var colMinAway = $('<td>').text(away);
+
+    row.append(colNextArrival);
+    row.append(colMinAway);
+
     $('tbody').append(row);
-
-  }
-
+  });
 });
