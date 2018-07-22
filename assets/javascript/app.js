@@ -42,6 +42,25 @@ $(document).ready(function() {
       });
 
       $('.form-control').val('');
+      
     }
+
   });
+
+  db.ref().on('child_added', function (snapshot) {
+    var snap = snapshot.val();
+
+    var row = $('<tr>');
+    var colName = $('<td>').text(snap.name);
+    var colDestination = $('<td>').text(snap.destination);
+    var colFrequency = $('<td>').text(snap.frequency);
+
+    row.append(colName);
+    row.append(colDestination);
+    row.append(colFrequency);
+
+    $('tbody').append(row);
+
+  }
+
 });
