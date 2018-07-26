@@ -31,7 +31,9 @@ $(document).ready(function() {
       name.length > 0 &&
       destination.length > 0 &&
       firstTime.length > 0 &&
-      frequency.length > 0
+      frequency.length > 0 &&
+      frequency > 0 &&
+      frequency <= 1440
     ) {
       db.ref().push({
         name: name,
@@ -42,6 +44,10 @@ $(document).ready(function() {
       });
 
       $('.form-control').val('');
+    } else {
+      alert(
+        'Fields should not be left blank and frequency should only have a value of 1-1400.'
+      );
     }
   });
 
@@ -53,10 +59,6 @@ $(document).ready(function() {
     var colDestination = $('<td>').text(snap.destination);
     var colFrequency = $('<td>').text(snap.frequency);
 
-    row.append(colName);
-    row.append(colDestination);
-    row.append(colFrequency);
-
     var safeStart = moment(snap.firstTime, 'HH:mm').subtract(1, 'years');
     var freq = parseInt(snap.frequency);
     var current = moment();
@@ -67,6 +69,9 @@ $(document).ready(function() {
     var colNextArrival = $('<td>').text(next);
     var colMinAway = $('<td>').text(away);
 
+    row.append(colName);
+    row.append(colDestination);
+    row.append(colFrequency);
     row.append(colNextArrival);
     row.append(colMinAway);
 
